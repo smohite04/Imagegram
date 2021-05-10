@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AccountApi.DataContract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,26 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace AccountApi.Web.Controllers
 {
     [Route("api/v1.0/[controller]")]
-    public class UserController : Controller
+    public class AccountController : Controller
     {
-        // GET api/<controller>/5
+        [TypeFilter(typeof(UserAuthorizationFilter))]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public AccountResponse Get(int id)
         {
-            return "value";
+            return null;
         }
-
-        // POST api/<controller>
+        
         [HttpPost]
-        public void Post([FromBody]string value)
+        public AccountResponse Post([FromBody]AccountRequest value)
         {
+            return null;
         }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        
         [TypeFilter(typeof(UserAuthorizationFilter))]
         [HttpDelete("{id}")]
         public void Delete(int id)
