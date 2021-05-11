@@ -61,6 +61,15 @@ namespace AccountApi.Common.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The error occured while creating an account..
+        /// </summary>
+        public static string AccountCreationError {
+            get {
+                return ResourceManager.GetString("AccountCreationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The token with value {1} has expired..
         /// </summary>
         public static string ExpiredToken {

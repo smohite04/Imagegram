@@ -25,5 +25,9 @@ namespace AccountApi.Common
         {
             return new BadRequestException(ErrorCodes.ExpiredToken, string.Format(ErrorMessages.ExpiredToken, value), HttpStatusCode.Unauthorized);
         }
+        public static BaseApplicationException AccountCreationError()
+        {
+            return new BaseApplicationException(ErrorCodes.AccountCreationError, string.Format(ErrorMessages.AccountCreationError), HttpStatusCode.InternalServerError);
+        }
     }
 }

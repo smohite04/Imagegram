@@ -11,7 +11,9 @@ namespace AccountApi.Domain
         {
             userId.ShouldNotBeNullOrEmpty(nameof(userId), nameof(AuthToken));          
         }
-        
+        /// <summary>
+        /// UserId provided by user
+        /// </summary>
         public string UserId { get; }
         public string Value { get; private set; }
         public DateTime CreatedOn { get; private set; }
@@ -32,6 +34,7 @@ namespace AccountApi.Domain
         public AuthToken WithAuthTokenValue(string value)
         {
             value.ShouldNotBeNullOrEmpty(nameof(value), nameof(AuthToken));
+            this.Value = value;
             return this;
         }        
     }
