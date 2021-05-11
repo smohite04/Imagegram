@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using UserPostApi.GraphQL.Service;
 
 namespace UserPostService.Controllers
@@ -26,11 +27,8 @@ namespace UserPostService.Controllers
         {
             var data = HttpContext.Request.Query;
                 if (query == null) { throw new ArgumentNullException(nameof(query)); }
-                var inputs = query.Variables.ToInputs();
-            foreach (var pair in data)
-            {
-                inputs.Add(pair.Key,pair.Value);
-            }
+            var inputs = query.Variables.ToInputs();
+
                 var executionOptions = new ExecutionOptions
                 {
                     Schema = _schema,
@@ -39,10 +37,9 @@ namespace UserPostService.Controllers
                 };
 
                 var result = await _documentExecuter.ExecuteAsync(executionOptions);
-
+            //TODO: add error handling
                 if (result.Errors?.Count > 0)
                 {
-                   // ErrorExtension.HandleErrors(result);
                     return BadRequest(result);
                 }
                 return Ok(result);            

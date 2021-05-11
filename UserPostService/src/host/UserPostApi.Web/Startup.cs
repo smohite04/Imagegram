@@ -48,9 +48,13 @@ namespace UserPostService
             {
                 app.UseHsts();
             }
-            app.UseGraphQL<UserPostSchema>();
-            app.UseGraphiQl();
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseGraphQL<UserPostSchema>(path:"/api/v1.0/postDetails");
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                GraphQLEndPoint = "/api/v1.0/postDetails",
+                Path = "/api/v1.0/postDetails/playground",
+            });
+           // app.UseGraphiQl();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -61,19 +65,13 @@ namespace UserPostService
             services.AddTransient<IPostService, MockPostService>();
             services.AddTransient<ICommentService, MockCommentService>();
             services.AddSingleton<UserPostQuery>();
-            services.AddSingleton<GetPostResponseType>();
-            services.AddSingleton<CommentDetailsType>();
-            services.AddSingleton<PagingDetailsType>();
-            services.AddSingleton<PaginatedCommentDetailsType>();
+            //services.AddSingleton<GetPostResponseType>();
+            //services.AddSingleton<CommentDetailsType>();
+            //services.AddSingleton<PagingDetailsType>();
+            //services.AddSingleton<PaginatedCommentDetailsType>();
             services.AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
-            services.AddSingleton<ISchema, UserPostSchema>();
-            services.AddGraphQL().AddGraphTypes(ServiceLifetime.Singleton);
-
-            services.AddGraphiQl(x =>
-            {
-                x.GraphiQlPath = "/graphiql-ui";
-                x.GraphQlApiPath = "graphql";
-            });
+            services.AddSingleton<UserPostSchema>();
+            services.AddGraphQL().AddGraphTypes(typeof(GetPostResponseType).Assembly, ServiceLifetime.Singleton);          
         }
     }
 }

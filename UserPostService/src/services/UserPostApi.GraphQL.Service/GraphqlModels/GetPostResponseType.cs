@@ -1,11 +1,9 @@
-﻿
-using GraphQL.Types;
+﻿using GraphQL.Types;
 using UserPostApi.Contracts;
-using UserPostApi.GraphQL.Service;
 
 namespace UserPostApi.GraphQL.Service
 {
-    public class GetPostResponseType : ObjectGraphType //<PostResponse>
+    public class GetPostResponseType : ObjectGraphType<PostResponse>
     {
         public GetPostResponseType(ContextServiceLocator contextServiceLocator)
         {
@@ -19,7 +17,7 @@ namespace UserPostApi.GraphQL.Service
                     var postId = (context.Source as PostResponse).Id;
                     return contextServiceLocator.ComemntService.GetCommentsBypostIdAsync(postId);
                 },
-                 description: "comments on given posts");
+                 description: "all comments on given posts");
 
             Field<PaginatedCommentDetailsType>("result",
               arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "id" },
@@ -28,15 +26,15 @@ namespace UserPostApi.GraphQL.Service
               resolve: context =>
               {
                   var pageNumber = context.GetArgument<int>("pn");
-                  var pageSize = context.GetArgument<int>("ps");                 
-                      var req = new PaginationRequest { PageNumber = pageNumber, PageSize = pageSize };
-                  var postId = (context.Source as PostResponse).Id;
-                      var comments = contextServiceLocator.ComemntService.GetPaginatedCommentsBypostIdAsync(postId, req)
+                  var pageSize = context.GetArgument<int>("ps");  
+                  
+                      var req = new PaginationRequest { PageNumber = pageNumber, PageSize = pageSize };                
+                      var comments = contextServiceLocator.ComemntService.GetPaginatedCommentsBypostIdAsync(context.Source.Id, req)
                       .ConfigureAwait(false).GetAwaiter().GetResult();
                       return comments;
                   
               },
-               description: "comments on given posts");
+               description: "comments on given posts with pagination");
         }
     }
 }
