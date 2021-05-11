@@ -9,8 +9,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="graphiql" Version="2.0.0" />
+    <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.1" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\UserPostApi.Contracts\UserPostApi.Contracts.csproj" />
+    <ProjectReference Include="..\..\services\UserPostApi.GraphQL.Service\UserPostApi.GraphQL.Service.csproj" />
+    <ProjectReference Include="..\..\services\UserPostApi.Service.Mock\UserPostApi.Service.Mock.csproj" />
   </ItemGroup>
 
 </Project>

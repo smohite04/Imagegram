@@ -21,7 +21,7 @@ namespace UserPostApi.Domain
         public DateTime CreatedOn { get; private set; }
         public string ImageUrl { get; }
 
-        public Comment WithCreatedOn(DateTime dateTime)
+        public Post WithCreatedOn(DateTime dateTime)
         {
             dateTime.ShouldBeAValidDate(nameof(dateTime), nameof(Comment), nameof(WithCreatedOn));
             CreatedOn = dateTime;
