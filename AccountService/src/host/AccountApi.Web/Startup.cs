@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AccountApi.Contracts;
+using AccountApi.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
@@ -23,7 +20,8 @@ namespace AccountApi
                        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                        options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });                      
                    });
-            
+            services.AddTransient<ITokenService,AccountApi.TokenService.TokenService>();
+            services.AddTransient<ITokenStore, AccountApi.TokenStore.MockTokenStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,8 +31,9 @@ namespace AccountApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            
+            app.UseExceptionMiddleWare();
+            app.UseContextCreationMiddleware();
+
             app.UseHttpsRedirection();           
             app.UseMvc();
         }

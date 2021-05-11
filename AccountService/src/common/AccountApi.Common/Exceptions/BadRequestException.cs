@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace AccountApi.Contracts
+namespace AccountApi.Common
 {
     [Serializable]
     public class BadRequestException : BaseApplicationException

@@ -21,12 +21,13 @@ namespace AccountApi.Web
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            
              CallContext.Current.Headers.TryGetValue(Keystore.Headers.AccountId, out string accountId);
             if (string.IsNullOrEmpty(accountId) == true)
                 throw Errors.MissingHeader(Keystore.Headers.AccountId);
 
             var value = _tokenService.ValidateAndRefreshAsync("").ConfigureAwait(false).GetAwaiter().GetResult();
-            if (value == null || string.IsNullOrEmpty(value.UserId) == true )
+            if (value == null || string.IsNullOrEmpty(value.UserId) == true)
             {
                 throw Errors.InvalidHeader(Keystore.Headers.AccountId);
             }

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AccountApi.Contracts;
 using AccountApi.DataContract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +12,13 @@ namespace AccountApi.Web.Controllers
     [Route("api/v1.0/[controller]")]
     public class AccountController : Controller
     {
+        //tODO : add account service
+        public AccountController()
+        {
+        }
         [TypeFilter(typeof(UserAuthorizationFilter))]
         [HttpGet("{id}")]
-        public AccountResponse Get(int id)
+        public async Task<AccountResponse> GetAsync(int id)
         {
             return null;
         }

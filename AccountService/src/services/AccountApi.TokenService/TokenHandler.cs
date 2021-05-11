@@ -1,4 +1,5 @@
-﻿using AccountApi.Contracts;
+﻿using AccountApi.Common;
+using AccountApi.Contracts;
 using AccountApi.Domain;
 using System;
 using System.Collections.Generic;

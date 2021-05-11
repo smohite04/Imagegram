@@ -1,10 +1,10 @@
-﻿using AccountApi.Contracts.Exceptions;
+﻿using AccountApi.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace AccountApi.Contracts
+namespace AccountApi.Common
 {
     public static class Errors
     {
