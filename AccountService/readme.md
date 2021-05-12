@@ -20,5 +20,13 @@ Apis Provided
 2. Authenticate (validate)
 3. Delete Token
 
-This  authentication header used by services is provided by token service and it validates the token as well.
+This authentication header used by services is provided by token service and it validates the token as well.
+
+The service currently consumes mock implementations for stores.
+
+----
+**_Tech debts or TODOs:_**
+1. To add unit testing for all implementations.
+2. Actual store implementation
+----
 
