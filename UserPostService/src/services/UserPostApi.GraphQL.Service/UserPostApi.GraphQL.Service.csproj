@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\common\UserPostApi.Common\UserPostApi.Common.csproj" />
     <ProjectReference Include="..\..\core\UserPostApi.Contracts\UserPostApi.Contracts.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UserPostApi.Common;
 using UserPostApi.Contracts;
 
 namespace UserPostApi.Service.Mock
@@ -28,9 +30,12 @@ namespace UserPostApi.Service.Mock
                 CreatedOn = DateTime.UtcNow.AddDays(-1)
             }
         };
-        public PostResponse GetPostAsync(string postId)
+        public async Task<PostResponse> GetPostAsync(string postId)
         {
-            return postResponses.Find(x => x.Id.Equals(postId, StringComparison.OrdinalIgnoreCase));
+            var response = postResponses.Find(x => x.Id.Equals(postId, StringComparison.OrdinalIgnoreCase));
+            if (response == null)
+                throw Errors.ValueDoesNotExist("post", postId);
+            return response;
         }
     }
 }

@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GraphiQl;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using UserPostApi.Contracts;
 using UserPostApi.GraphQL.Service;
 using UserPostApi.Service.Mock;
+using UserPostApi.Web;
 
 namespace UserPostService
 {
@@ -35,6 +28,10 @@ namespace UserPostService
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             AddGraphQLConfigurations(services);
+            //TODO: added mock implementations , need to be replaced with actual implementation
+            services.AddTransient<IPostService, MockPostService>();
+            services.AddTransient<ICommentService, MockCommentService>();
+            services.AddTransient<IAccountAuthenticationAdapter, MockTokenAuthenticationAdapter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,29 +45,24 @@ namespace UserPostService
             {
                 app.UseHsts();
             }
-            app.UseGraphQL<UserPostSchema>(path:"/api/v1.0/postDetails");
+            app.UseGraphQL<UserPostSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 GraphQLEndPoint = "/api/v1.0/postDetails",
                 Path = "/api/v1.0/postDetails/playground",
             });
-           // app.UseGraphiQl();
+            app.UseExceptionMiddleWare();
+            app.UseContextCreationMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
         private static void AddGraphQLConfigurations(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddSingleton<ContextServiceLocator>();
-            services.AddTransient<IPostService, MockPostService>();
-            services.AddTransient<ICommentService, MockCommentService>();
+            services.AddSingleton<ContextServiceLocator>();            
             services.AddSingleton<UserPostQuery>();
-            //services.AddSingleton<GetPostResponseType>();
-            //services.AddSingleton<CommentDetailsType>();
-            //services.AddSingleton<PagingDetailsType>();
-            //services.AddSingleton<PaginatedCommentDetailsType>();
             services.AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
-            services.AddSingleton<UserPostSchema>();
+            services.AddSingleton<ISchema,UserPostSchema>();
             services.AddGraphQL().AddGraphTypes(typeof(GetPostResponseType).Assembly, ServiceLifetime.Singleton);          
         }
     }

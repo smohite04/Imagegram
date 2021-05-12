@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\common\UserPostApi.Common\UserPostApi.Common.csproj" />
     <ProjectReference Include="..\..\core\UserPostApi.Contracts\UserPostApi.Contracts.csproj" />
     <ProjectReference Include="..\..\services\UserPostApi.GraphQL.Service\UserPostApi.GraphQL.Service.csproj" />
     <ProjectReference Include="..\..\services\UserPostApi.Service.Mock\UserPostApi.Service.Mock.csproj" />

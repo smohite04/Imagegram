@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace UserPostApi.Contracts
 {
+    /// <summary>
+    /// Post service will deal with post related operations.
+    /// </summary>
     public interface IPostService
     {
-        PostResponse GetPostAsync(string postId);
+        Task<PostResponse> GetPostAsync(string postId);
     }
 }

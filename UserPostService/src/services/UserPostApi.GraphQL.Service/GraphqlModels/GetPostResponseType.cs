@@ -1,4 +1,5 @@
 ﻿using GraphQL.Types;
+using UserPostApi.Common;
 using UserPostApi.Contracts;
 
 namespace UserPostApi.GraphQL.Service
