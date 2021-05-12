@@ -6,7 +6,7 @@ using UserPostApi.Contracts;
 
 namespace UserPostApi.Service.Mock
 {
-    public class MockPostService : IPostService
+    public class MockPostService : IPostServiceAdapter
     {
         private static List<PostResponse> postResponses = new List<PostResponse> {
             new PostResponse{

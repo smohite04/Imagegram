@@ -29,8 +29,8 @@ namespace UserPostService
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             AddGraphQLConfigurations(services);
             //TODO: added mock implementations , need to be replaced with actual implementation
-            services.AddTransient<IPostService, MockPostService>();
-            services.AddTransient<ICommentService, MockCommentService>();
+            services.AddTransient<IPostServiceAdapter, MockPostService>();
+            services.AddTransient<ICommentServiceAdapter, MockCommentService>();
             services.AddTransient<IAccountAuthenticationAdapter, MockTokenAuthenticationAdapter>();
         }
 

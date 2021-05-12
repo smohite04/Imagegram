@@ -9,19 +9,19 @@ namespace UserPostApi.GraphQL.Service
 {
     public class ContextServiceLocator
     {
-        public IPostService PostService
+        public IPostServiceAdapter PostService
         {
             get
             {
-                return _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IPostService>();
+                return _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IPostServiceAdapter>();
             }
         }
 
-        public ICommentService ComemntService
+        public ICommentServiceAdapter ComemntService
         {
             get
             {
-                return _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ICommentService>();
+                return _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<ICommentServiceAdapter>();
             }
         }
         private readonly IHttpContextAccessor _httpContextAccessor;
