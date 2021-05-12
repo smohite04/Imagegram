@@ -50,4 +50,5 @@ NOTE: currently mock token authenticator is added along with all mock implementa
 **_Tech debts or TODOs:_**
 1. To add unit testing for all implementations.
 2. Actual adapter implementations to connect with the microservices (posts).
+3. Mutation or support to perform other operations like delete for user.
 ----

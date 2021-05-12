@@ -27,6 +27,7 @@ The service currently consumes mock implementations for stores.
 ----
 **_Tech debts or TODOs:_**
 1. To add unit testing for all implementations.
-2. Actual store implementation
+2. Actual store implementation.
+3. delete and updpate account implementation
 ----
 
