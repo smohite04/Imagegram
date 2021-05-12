@@ -12,12 +12,12 @@ namespace AccountApi.Mock
     {
         private static ConcurrentDictionary<string, AccountEntity> _accounts = new ConcurrentDictionary<string, AccountEntity>();
         private static ConcurrentDictionary<string, AccountEntity> _accountsByUserId = new ConcurrentDictionary<string, AccountEntity>();
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteByUserIdAsync(string userId)
         {
-            if (_accounts.TryRemove(id, out AccountEntity entity) == true)
+            if (_accountsByUserId.TryRemove(userId, out AccountEntity accountEntity) == true)
             {
-                var userId = entity.UserId;
-                if (_accountsByUserId.TryRemove(userId, out AccountEntity accountEntity) == true)
+                var id = accountEntity.Id;
+                if (_accounts.TryRemove(id, out AccountEntity entity) == true)
                 {
                     return true;
                 }

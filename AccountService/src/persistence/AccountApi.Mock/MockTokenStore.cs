@@ -3,7 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
-namespace AccountApi.TokenStore
+namespace AccountApi.Mock
 {
     /// <summary>
     /// Mock store implementation

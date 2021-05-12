@@ -79,6 +79,15 @@ namespace AccountApi.Common.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An internal server occured..
+        /// </summary>
+        public static string InternalServerError {
+            get {
+                return ResourceManager.GetString("InternalServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The invalid value for the {0} field is provided in the request.
         /// </summary>
         public static string InvalidField {

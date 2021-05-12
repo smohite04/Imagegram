@@ -20,8 +20,10 @@ namespace AccountApi
                        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                        options.SerializerSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });                      
                    });
-            services.AddTransient<ITokenService,AccountApi.TokenService.TokenService>();
-            services.AddTransient<ITokenStore, AccountApi.TokenStore.MockTokenStore>();
+            services.AddTransient<ITokenService, TokenService.TokenService>();
+            services.AddTransient<ITokenStore, Mock.MockTokenStore>();
+            services.AddTransient<IAccountStore, Mock.MockAccountStore>();
+            services.AddTransient<IAccountService, AccountService.AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

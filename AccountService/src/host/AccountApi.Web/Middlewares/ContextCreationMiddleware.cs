@@ -22,10 +22,6 @@ namespace AccountApi.Web
 
         public async Task Invoke(HttpContext httpContext)
         {
-            //if (TryGetHeaderValue(httpContext.Request.Headers, Keystore.Headers.AccountId, true, out string value) == false)
-            //{
-            //    throw Errors.MissingHeader(Keystore.Headers.AccountId);
-            //}
             var headers = httpContext.Request.Headers.ToDictionary(a => a.Key, a => a.Value.ToString());
             var context = new CallContext(headers);
 

@@ -123,6 +123,9 @@
   <data name="ExpiredToken" xml:space="preserve">
     <value>The token with value {1} has expired.</value>
   </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>An internal server occured.</value>
+  </data>
   <data name="InvalidField" xml:space="preserve">
     <value>The invalid value for the {0} field is provided in the request</value>
   </data>

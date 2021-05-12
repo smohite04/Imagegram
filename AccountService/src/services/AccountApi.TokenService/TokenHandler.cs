@@ -27,8 +27,9 @@ namespace AccountApi.TokenService
         }
         public static void ExtendExpiryByDefaultPeriod(this AuthToken authToken)
         {
-            var expiresOn = authToken.ExpiresOn.AddSeconds(_expiryInSeconds);
-            authToken.WithExpiresOn(expiresOn);
+           var expiresOn = authToken.ExpiresOn.AddSeconds(_expiryInSeconds);
+           authToken.WithExpiresOn(expiresOn);
+            
         }
         public static void IsValid(this AuthTokenEntity entity, string token)
         {

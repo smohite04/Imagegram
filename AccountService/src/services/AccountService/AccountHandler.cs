@@ -21,5 +21,10 @@ namespace AccountApi.AccountService
             if (entity == null || string.IsNullOrEmpty(entity.Id) == true)
                 throw Errors.ValueDoesNotExist("account", id);
         }
+        public static void EnsureDeleted(this bool value)
+        {
+            if (value == false)
+                throw Errors.InternalServerError();
+        }
     }
 }

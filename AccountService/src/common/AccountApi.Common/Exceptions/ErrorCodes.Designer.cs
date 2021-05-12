@@ -79,6 +79,15 @@ namespace AccountApi.Common.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 110.
+        /// </summary>
+        public static string InternalServerError {
+            get {
+                return ResourceManager.GetString("InternalServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 103.
         /// </summary>
         public static string InvalidField {

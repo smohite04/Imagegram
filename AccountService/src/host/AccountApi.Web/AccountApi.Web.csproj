@@ -19,8 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\common\AccountApi.Common\AccountApi.Common.csproj" />
     <ProjectReference Include="..\..\core\AccountApi.Gateways\AccountApi.Contracts.csproj" />
-    <ProjectReference Include="..\..\persistence\AccountApi.TokenStore\AccountApi.MockTokenStore.csproj" />
+    <ProjectReference Include="..\..\persistence\AccountApi.Mock\AccountApi.Mock.csproj" />
     <ProjectReference Include="..\..\services\AccountApi.TokenService\AccountApi.TokenService.csproj" />
+    <ProjectReference Include="..\..\services\AccountService\AccountService.csproj" />
     <ProjectReference Include="..\AccountApi.DataContract\AccountApi.DataContract.csproj" />
   </ItemGroup>
 
