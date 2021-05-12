@@ -9,11 +9,11 @@ Service needs to be authenticated with the header: "X-Account-Id".
 
 This header represents the token/session provided to user upon login as a part of authentication.
 
-The service uses GraphQL to get the nested objects.
+The service uses **GraphQL** to get the nested objects.
 
 The example of the graph query for paginated postDetails is as below:
 
-```json
+```c#
 query($id: String!, $pn: Int!, $ps: Int!) {
   postWithPaginatedComments(id: $id) {
     id
@@ -35,7 +35,7 @@ query($id: String!, $pn: Int!, $ps: Int!) {
 }
 ```
 Variables:
-```json
+```c#
 {
     "id":"1",
     "pn":5,
