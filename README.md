@@ -15,8 +15,9 @@ Basic block diagram for system </br>
  6. **Token service**: The service deals with the token creation/validation which is responsible for header validation.
 ----
 ## Assumptions:
- 1. The SSO login service already exists and upon login it issues token and stores in the session.
+ 1. The SSO login service already exists and upon login, it issues token by requesting token to token service and stores in the session.
  2. For new sign up, once credentials are created and stored, it will share the username/userid to be stored with the account. (Account API will only store the account details in the DB along with assoicated userid).
+ 3. Upon logout, the login service deletes the toekn by calling the token service.
 ----
  ## Sequence diagram:
  Below diagram is to give the high level idea of sequence flow for the system</br>
