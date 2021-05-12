@@ -18,24 +18,24 @@ namespace AccountApi.Web.Controllers
         {
             this._tokenService = tokenService;
         }
-        [HttpGet("{id}")]
-        public async Task<AuthTokenResponse> GenerateAsync(string userId)
+        [HttpPost()]
+        public async Task<AuthTokenResponse> GenerateAsync([FromBody]AuthTokenRequest authTokenRequest)
         {
-            var response = await _tokenService.CreateAsync(userId);
+            var response = await _tokenService.CreateAsync(authTokenRequest.UserId);
             return response.ToDataContract();
         }
-        
-        [HttpGet("authenticate")]
-        public async  Task<AuthTokenResponse> AuthenticateAsync()
+
+        [HttpGet("{token}")]
+        public async Task<AuthTokenResponse> AuthenticateAsync(string token)
         {
-            var response = await _tokenService.ValidateAndRefreshAsync(CallContext.Current.AuthenticationToken);
+            var response = await _tokenService.ValidateAndRefreshAsync(token);
             return response.ToDataContract();
         }
-        
-        [HttpDelete()]
-        public async Task DeleteAsync()
+
+        [HttpDelete("{token}")]
+        public async Task DeleteAsync(string token)
         {
-            await _tokenService.DeleteAsync(CallContext.Current.AuthenticationToken);
+            await _tokenService.DeleteAsync(token);
         }
     }
 }

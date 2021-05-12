@@ -1,4 +1,5 @@
 ﻿using AccountApi.Common;
+using AccountApi.Common.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -67,7 +68,7 @@ namespace AccountApi.Web
         }
         private ErrorInfo GetInternalServerError()
         {
-            return new ErrorInfo {Code = "500", Message="Internal server error occurred." };
+            return new ErrorInfo {Code = ErrorCodes.InternalServerError, Message= ErrorMessages.InternalServerError };
         }
     }
 

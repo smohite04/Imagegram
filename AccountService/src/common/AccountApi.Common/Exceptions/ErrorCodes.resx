@@ -123,6 +123,9 @@
   <data name="ExpiredToken" xml:space="preserve">
     <value>105</value>
   </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>110</value>
+  </data>
   <data name="InvalidField" xml:space="preserve">
     <value>103</value>
   </data>

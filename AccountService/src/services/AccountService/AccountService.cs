@@ -24,20 +24,26 @@ namespace AccountApi.AccountService
             return data.ToContract();
         }
 
-        public async Task<string> DeleteInitAsync(string userId)
+        public async Task<bool> DeleteByUserIdAsync(string userId)
         {
             //get account
             //verify
             var accountEntity = await _accountStore.GetByUserIdAsync(userId);
             accountEntity.EnsureValid(userId);
             
-            //TODO:  add in house queue for data deletion and return the session linked against it
-            return Guid.NewGuid().ToString();
+            var isDeleted = await _accountStore.DeleteByUserIdAsync(userId);
+            isDeleted.EnsureDeleted();
+            return isDeleted;
         }
 
-        public Task<AccountDeletionResponse> DeleteStatusAsync(string sessionId)
+        public async Task<AccountResponse> GetByUserIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            //get account
+            //verify
+            var accountEntity = await _accountStore.GetByUserIdAsync(userId);
+            accountEntity.EnsureValid(userId);
+            var data = accountEntity.ToDomainModel();
+            return data.ToContract();
         }
     }
 }

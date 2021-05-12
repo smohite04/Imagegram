@@ -1,4 +1,5 @@
 ﻿using AccountApi.Common;
+using AccountApi.Common.Exceptions;
 using AccountApi.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,13 +27,31 @@ namespace AccountApi.Web
             if (string.IsNullOrEmpty(accountId) == true)
                 throw Errors.MissingHeader(Keystore.Headers.AccountId);
 
-            var value = _tokenService.ValidateAndRefreshAsync("").ConfigureAwait(false).GetAwaiter().GetResult();
-            if (value == null || string.IsNullOrEmpty(value.UserId) == true)
+            AuthTokenResponse response = null;
+            try
+            {
+                response = _tokenService.ValidateAndRefreshAsync(accountId).ConfigureAwait(false).GetAwaiter().GetResult();
+               
+            }
+            catch (BaseApplicationException ex)
+            {
+                //log exception. since we want to override the exception
+                if(ex.ErrorCode.Equals(ErrorCodes.ExpiredToken) || ex.ErrorCode.Equals(ErrorCodes.ValueDoesNotExist))
+                    throw Errors.InvalidHeader(Keystore.Headers.AccountId);
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                //log exception. since we want to override the exception               
+                    throw Errors.InternalServerError();
+            }
+            if (response == null || string.IsNullOrEmpty(response.UserId) == true)
             {
                 throw Errors.InvalidHeader(Keystore.Headers.AccountId);
             }
-            CallContext.Current.SetUserId(value.UserId);
-            CallContext.Current.SetToken(value.Token);
+            CallContext.Current.SetUserId(response.UserId);
+            CallContext.Current.SetToken(response.Token);
         }
     }
 }

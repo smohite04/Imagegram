@@ -9,7 +9,8 @@ namespace AccountApi.Domain
     {
         public AuthToken(string userId)
         {
-            userId.ShouldNotBeNullOrEmpty(nameof(userId), nameof(AuthToken));          
+            userId.ShouldNotBeNullOrEmpty(nameof(userId), nameof(AuthToken));
+            UserId = userId;
         }
         /// <summary>
         /// UserId provided by user

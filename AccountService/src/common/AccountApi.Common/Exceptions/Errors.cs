@@ -27,7 +27,11 @@ namespace AccountApi.Common
         }
         public static BaseApplicationException AccountCreationError()
         {
-            return new BaseApplicationException(ErrorCodes.AccountCreationError, string.Format(ErrorMessages.AccountCreationError), HttpStatusCode.InternalServerError);
+            return new ApplicationException(ErrorCodes.AccountCreationError, string.Format(ErrorMessages.AccountCreationError), HttpStatusCode.InternalServerError);
+        }
+        public static BaseApplicationException InternalServerError()
+        {
+            return new ApplicationException(ErrorCodes.InternalServerError, string.Format(ErrorMessages.InternalServerError), HttpStatusCode.InternalServerError);
         }
     }
 }

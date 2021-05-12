@@ -8,7 +8,7 @@ namespace AccountApi.Contracts
     public interface IAccountService
     {
        Task<AccountResponse> CreateAsync(AccountRequest accountRequest);
-       Task<string> DeleteInitAsync(string accountId);
-       Task<AccountDeletionResponse> DeleteStatusAsync(string sessionId);
+       Task<AccountResponse> GetByUserIdAsync(string userId);
+        Task<bool> DeleteByUserIdAsync(string userId);
     }
 }

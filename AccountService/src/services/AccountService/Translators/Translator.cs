@@ -1,8 +1,5 @@
 ﻿using AccountApi.Contracts;
 using AccountApi.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AccountApi.AccountService
 {
