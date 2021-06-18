@@ -30,6 +30,12 @@ namespace UserPostApi.Service.Mock
                 CreatedOn = DateTime.UtcNow.AddDays(-1)
             }
         };
+
+        public async Task<bool> DeletePostbyUserIdAsync(string userId)
+        {
+            return true;
+        }
+
         public async Task<PostResponse> GetPostAsync(string postId)
         {
             var response = postResponses.Find(x => x.Id.Equals(postId, StringComparison.OrdinalIgnoreCase));

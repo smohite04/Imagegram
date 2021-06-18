@@ -1,4 +1,6 @@
 ﻿using GraphQL.Types;
+using System;
+using System.Linq;
 using UserPostApi.Common;
 using UserPostApi.Contracts;
 
@@ -36,6 +38,25 @@ namespace UserPostApi.GraphQL.Service
                   
               },
                description: "comments on given posts with pagination");
+        }
+    }
+    public class DeletePostResponseType : ObjectGraphType<DeleteResponse>
+    {
+        public DeletePostResponseType(ContextServiceLocator contextServiceLocator)
+        {
+            Field(x => x.Success);
+            Field(x => x.Id);
+            Field<ListGraphType<DeleteCommentDetailsType>>("comments",
+                arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "id" }),
+                resolve: context =>
+                {
+                    var postId = context.Source.Id;                 
+                    var data  = contextServiceLocator.ComemntService.DeleteCommentsBypostIdAsync(postId).ConfigureAwait(false).GetAwaiter().GetResult();
+                    return data.Select(x => new DeleteResponse { Success = "deleted", Id = x });
+                },
+                 description: "all comments on given posts");
+
+            
         }
     }
 }

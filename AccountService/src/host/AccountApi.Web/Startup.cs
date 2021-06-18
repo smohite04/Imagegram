@@ -24,6 +24,12 @@ namespace AccountApi
             services.AddTransient<ITokenStore, Mock.MockTokenStore>();
             services.AddTransient<IAccountStore, Mock.MockAccountStore>();
             services.AddTransient<IAccountService, AccountService.AccountService>();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Account and token api Documentation", Version = "Version 1.0" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +41,16 @@ namespace AccountApi
             }
             app.UseExceptionMiddleWare();
             app.UseContextCreationMiddleware();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "docs/{documentName}/docs.json";
+               
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/docs.json", "Account and token API");
+                c.RoutePrefix = "docs";
+            });
 
             app.UseHttpsRedirection();           
             app.UseMvc();

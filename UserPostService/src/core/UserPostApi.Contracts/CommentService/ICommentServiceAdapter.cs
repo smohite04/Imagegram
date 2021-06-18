@@ -11,5 +11,7 @@ namespace UserPostApi.Contracts
     {
         Task<List<Comment>> GetCommentsBypostIdAsync(string postId);
         Task<PaginatedResponse<Comment>> GetPaginatedCommentsBypostIdAsync(string postId, PaginationRequest request);
+
+        Task<IEnumerable<string>> DeleteCommentsBypostIdAsync(string postId);
     }
 }

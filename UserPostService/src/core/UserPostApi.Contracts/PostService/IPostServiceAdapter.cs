@@ -9,5 +9,6 @@ namespace UserPostApi.Contracts
     public interface IPostServiceAdapter
     {
         Task<PostResponse> GetPostAsync(string Id);
+        Task<bool> DeletePostbyUserIdAsync(string userId);
     }
 }

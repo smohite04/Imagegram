@@ -9,6 +9,7 @@ namespace UserPostApi.GraphQL.Service
         public UserPostSchema(IDependencyResolver dependencyResolver) : base(dependencyResolver)
         {
             Query = dependencyResolver.Resolve<UserPostQuery>();
+            Mutation = dependencyResolver.Resolve<UserMutation>();
         }
     }
 }

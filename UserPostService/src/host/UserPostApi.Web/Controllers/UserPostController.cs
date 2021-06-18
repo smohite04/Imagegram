@@ -43,5 +43,29 @@ namespace UserPostApi.Web
             }
             return Ok(result);
         }
+        [HttpPost]
+        [Route("DeleteUser/init")]
+        public async Task<IActionResult> DeleteUserPostDetailsAsync([FromBody] GraphQLQuery query)
+        {
+            if (query == null || string.IsNullOrWhiteSpace(query.Query) == true)
+            {
+                throw Errors.MissingField(nameof(query));
+            }
+            var inputs = query.Variables.ToInputs();
+
+            var executionOptions = new ExecutionOptions
+            {
+                Schema = _schema,
+                Query = query.Query,
+                Inputs = inputs
+            };
+
+            var result = await _documentExecuter.ExecuteAsync(executionOptions);
+            if (result.Errors?.Count > 0)
+            {
+                result.Errors.ToException();
+            }
+            return Ok(result);
+        }
     }
 }

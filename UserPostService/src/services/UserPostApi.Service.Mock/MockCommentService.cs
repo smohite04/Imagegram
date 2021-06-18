@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,11 @@ namespace UserPostApi.Service.Mock
                CreatedOn = DateTime.UtcNow.AddDays(-3)
             },
         };
+
+        public async Task<IEnumerable<string>> DeleteCommentsBypostIdAsync(string postId)
+        {
+            return comments.Where(y=>y.PostId == postId).Select(x=>x.Id);
+        }
 
         public async Task<List<Comment>> GetCommentsBypostIdAsync(string postId)
         {

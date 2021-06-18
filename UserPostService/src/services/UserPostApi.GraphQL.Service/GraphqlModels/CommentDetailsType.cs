@@ -32,6 +32,15 @@ namespace UserPostApi.GraphQL.Service
             Field(x => x.TotalCount);
         }
     }
+
+    public class DeleteCommentDetailsType : ObjectGraphType
+    {
+        public DeleteCommentDetailsType()
+        {
+            Field<StringGraphType>("success","Success");
+            Field<StringGraphType>("id", "Id");
+        }
+    }
 }
 
  
