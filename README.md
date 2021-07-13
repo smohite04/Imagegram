@@ -7,7 +7,7 @@ Basic block diagram for system </br>
 
 ## High Level Blocks' Explaination
 
- 1. **Account service**: The service deals with the account CRUD operations..
+ 1. **Account service**: The service deals with the account CRUD operations.
  2. **Image Upload service**: The service deals image upload. The service is made a different mciroservice, considering the read to write ratio and since, image upload will be heavy operation, the process should not impact the latency of read operation whose volume will be higher than upload operation.
  3. **User Post service**: The service deals with all get operations or the operations which need nested response. All post related operations of a user, like get all posts, get all users, get all comments related to post.
  4. **Comment service**: The service deals with the comment CRUD operations
